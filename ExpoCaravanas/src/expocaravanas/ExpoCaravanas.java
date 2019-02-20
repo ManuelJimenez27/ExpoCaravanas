@@ -5,6 +5,7 @@
  */
 package expocaravanas;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -28,7 +29,14 @@ public class ExpoCaravanas {
             System.out.println("1. Mostrar numero de entradas");
             System.out.println("2. Vender entradas");
             System.out.println("3. Salir");
-            opcion = sc.nextInt();
+            try {
+                String linea;
+                linea = sc.nextLine();
+                opcion = Integer.parseInt(linea);
+            } catch (NumberFormatException e) {
+                System.out.println("Error en la entrada");
+                opcion = 0;
+            }
             TotalEntradas = Principal.getEntradas() + CompraVenta.getEntradas() + Vip.getEntradas();
             if (opcion == 1) {
                 System.out.println("Quedan " + TotalEntradas + " entradas en total");
